@@ -1,0 +1,323 @@
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+using namespace std;
+
+// ==========================================
+// CLASE PAR O IMPAR
+// ==========================================
+class ParImpar {
+private:
+    int N;
+
+public:
+    ParImpar() {
+        N = 0;
+    }
+
+    void setN(int n) {
+        N = n;
+    }
+
+    void verificar() {
+        if (N % 2 == 0) {
+            cout << "Es Par" << endl;
+        } else {
+            cout << "Es Impar" << endl;
+        }
+    }
+};
+
+// ==========================================
+// CLASE CERO ALTERNADO
+// ==========================================
+class CeroAlternado {
+private:
+    int N;
+    int suma;
+
+public:
+    CeroAlternado() {
+        N = 0;
+        suma = 0;
+    }
+
+    void setN(int n) {
+        N = n;
+    }
+
+    void calcularSerie() {
+        int contador = 1;
+        suma = 0;
+
+        cout << "Serie: ";
+
+        for (int i = 1; i <= N; i++) {
+            int termino;
+
+            if (i % 2 != 0) {
+                termino = contador;
+                contador++;
+            } else {
+                termino = 0;
+            }
+
+            cout << termino;
+            if (i < N) {
+                cout << ", ";
+            }
+
+            suma += termino;
+        }
+
+        cout << "\nSuma total: " << suma << endl;
+    }
+};
+
+// ==========================================
+// CLASE FIBONACCI DIVIDIDA ENTRE IMPARES
+// ==========================================
+class FibImpar {
+private:
+    int N;
+    double suma;
+
+public:
+    FibImpar() {
+        N = 0;
+        suma = 0;
+    }
+
+    void setN(int n) {
+        N = n;
+    }
+
+    void calcularSerie() {
+        int a = 0;
+        int b = 1;
+        suma = 0;
+
+        cout << "\nSerie Fibonacci dividida entre impares:\n";
+
+        for (int i = 1; i <= N; i++) {
+            int denominador = (2 * i) - 1;
+            double termino = static_cast<double>(a) / denominador;
+
+            cout << a << "/" << denominador << " = "
+                 << fixed << setprecision(4) << termino << endl;
+
+            suma += termino;
+
+            int siguiente = a + b;
+            a = b;
+            b = siguiente;
+        }
+
+        cout << "Suma total: " << fixed << setprecision(4)
+             << suma << endl;
+    }
+};
+
+// ==========================================
+// CLASE SUMA DE PARES E IMPARES
+// ==========================================
+class ProcesamientoIntegrado {
+private:
+    int N;
+    int sumaPares;
+    int sumaImpares;
+
+public:
+    ProcesamientoIntegrado() {
+        N = 0;
+        sumaPares = 0;
+        sumaImpares = 0;
+    }
+
+    void setN(int n) {
+        N = n;
+    }
+
+    void procesar() {
+        sumaPares = 0;
+        sumaImpares = 0;
+
+        for (int i = 1; i <= N; i++) {
+            if (i % 2 == 0) {
+                sumaPares += i;
+            } else {
+                sumaImpares += i;
+            }
+        }
+
+        cout << "Procesando los primeros " << N << " términos:\n";
+        cout << "Suma Pares: " << sumaPares
+             << " | Suma Impares: " << sumaImpares << endl;
+    }
+};
+
+// ==========================================
+// CLASE SERIE PROGRESIVA INCREMENTAL
+// ==========================================
+class ProgresivaIncremental {
+private:
+    int N;
+
+public:
+    ProgresivaIncremental() {
+        N = 0;
+    }
+
+    void setN(int n) {
+        N = n;
+    }
+
+    void generarSerie() {
+        int termino = 1;
+        int incremento = 1;
+
+        cout << "Serie: ";
+
+        for (int i = 1; i <= N; i++) {
+            cout << termino;
+
+            if (i < N) {
+                cout << ", ";
+            }
+
+            termino += incremento;
+            incremento++;
+        }
+
+        cout << endl;
+    }
+};
+
+// ==========================================
+// FUNCIONES PARA EJECUTAR CADA EJERCICIO
+// ==========================================
+int leerNumero() {
+    int numero;
+
+    cout << "Ingrese un número entero: ";
+    cin >> numero;
+
+    return numero;
+}
+
+int leerCantidadTerminos() {
+    int n;
+
+    cout << "Ingrese la cantidad de términos: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "La cantidad debe ser mayor que cero." << endl;
+        return 0;
+    }
+
+    return n;
+}
+
+void ejecutarParImpar() {
+    ParImpar ejercicio;
+    ejercicio.setN(leerNumero());
+    ejercicio.verificar();
+}
+
+void ejecutarCeroAlternado() {
+    int n = leerCantidadTerminos();
+
+    if (n > 0) {
+        CeroAlternado ejercicio;
+        ejercicio.setN(n);
+        ejercicio.calcularSerie();
+    }
+}
+
+void ejecutarFibImpar() {
+    int n = leerCantidadTerminos();
+
+    if (n > 0) {
+        FibImpar ejercicio;
+        ejercicio.setN(n);
+        ejercicio.calcularSerie();
+    }
+}
+
+void ejecutarSumas() {
+    int n = leerCantidadTerminos();
+
+    if (n > 0) {
+        ProcesamientoIntegrado ejercicio;
+        ejercicio.setN(n);
+        ejercicio.procesar();
+    }
+}
+
+void ejecutarProgresiva() {
+    int n = leerCantidadTerminos();
+
+    if (n > 0) {
+        ProgresivaIncremental ejercicio;
+        ejercicio.setN(n);
+        ejercicio.generarSerie();
+    }
+}
+
+// ==========================================
+// PROGRAMA PRINCIPAL CON MENÚ
+// ==========================================
+int main() {
+    int opcion;
+
+    do {
+        cout << "\n==========================================" << endl;
+        cout << "       MENU DE EJERCICIOS " << endl;
+        cout << "==========================================" << endl;
+        cout << "1. Determinar si un número es par o impar" << endl;
+        cout << "2. Serie cero alternado y suma" << endl;
+        cout << "3. Fibonacci dividido entre impares" << endl;
+        cout << "4. Suma de números pares e impares" << endl;
+        cout << "5. Serie progresiva incremental" << endl;
+        cout << "0. Salir" << endl;
+        cout << "==========================================" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        cout << endl;
+
+        switch (opcion) {
+            case 1:
+                ejecutarParImpar();
+                break;
+
+            case 2:
+                ejecutarCeroAlternado();
+                break;
+
+            case 3:
+                ejecutarFibImpar();
+                break;
+
+            case 4:
+                ejecutarSumas();
+                break;
+
+            case 5:
+                ejecutarProgresiva();
+                break;
+
+            case 0:
+                cout << "Fin del programa." << endl;
+                break;
+
+            default:
+                cout << "Opción no válida. Intente nuevamente." << endl;
+        }
+
+    } while (opcion != 0);
+
+    system("pause");
+    return 0;
+}
